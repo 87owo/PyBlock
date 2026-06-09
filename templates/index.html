@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block OS</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <script src="/static/js/blockly.min.js"></script>
+    <script src="/static/js/python_compressed.js"></script>
+    <script src="/static/js/i18n.js"></script>
+    <script src="/static/js/main.js" defer></script>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-group">
+            <div class="dropdown">
+                <button class="dropbtn" data-i18n="file"></button>
+                <div class="dropdown-content">
+                    <a href="#" id="btnNew" data-i18n="new_project"></a>
+                    <a href="#" id="btnSave" data-i18n="save_project"></a>
+                    <a href="#" id="btnRun" data-i18n="run_project"></a>
+                    <a href="#" id="btnStop" data-i18n="stop_project"></a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn" data-i18n="settings"></button>
+                <div class="dropdown-content">
+                    <a href="#" onclick="app.changeLanguage('zh-TW')">繁體中文</a>
+                    <a href="#" onclick="app.changeLanguage('en')">English</a>
+                </div>
+            </div>
+            <div class="project-indicator">
+                <span id="currentProjectName">project_1</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <aside class="file-manager">
+            <h3 data-i18n="file_manager"></h3>
+            <ul id="fileList"></ul>
+        </aside>
+        
+        <div class="workspace-wrapper">
+            <div id="blocklyDiv"></div>
+        </div>
+
+        <aside class="code-panel">
+            <div class="code-header" data-i18n="python_preview"></div>
+            <pre id="pythonCode"></pre>
+        </aside>
+    </div>
+
+    <footer class="terminal-container">
+        <div class="terminal-header" data-i18n="terminal_log"></div>
+        <pre class="terminal-output" id="terminalOutput"></pre>
+    </footer>
+</body>
+</html>
