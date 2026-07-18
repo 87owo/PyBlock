@@ -1,7 +1,7 @@
 class BlockOS {
     constructor() {
         this.workspace = null;
-        this.currentLang = 'zh-TW';
+        this.currentLang = 'en';
         this.currentProject = 'project_1';
         this.colors = {
             EVENTS: '#FFBF00', 
@@ -28,6 +28,7 @@ class BlockOS {
     changeLanguage(lang) {
         if (!i18nDict[lang]) return;
         this.currentLang = lang;
+        document.documentElement.lang = lang;
         
         document.querySelectorAll('[data-i18n]').forEach(el => {
             const key = el.getAttribute('data-i18n');

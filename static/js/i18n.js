@@ -61,6 +61,68 @@ const i18nDict = {
             OP_DICT_KV: '鍵 %1 值 %2'
         }
     },
+    'zh-CN': {
+        UI: {
+            file: '文件',
+            new_project: '新建项目',
+            open_project: '打开项目',
+            save_project: '保存项目',
+            run_project: '运行项目',
+            stop_project: '停止项目',
+            settings: '设置',
+            file_manager: '项目管理',
+            python_preview: 'Python 实时预览',
+            terminal_log: '命令行执行日志'
+        },
+        B: {
+            CAT_EVENTS: '事件',
+            CAT_CONTROL: '控制',
+            CAT_VARS: '变量',
+            CAT_MATH: '运算',
+
+            EV_MAIN: '当主程序运行时',
+            EV_IMPORT: '导入模块 %1',
+            EV_FROM: '从模块 %1 导入 %2',
+            EV_CLASS: '声明类 %1 继承 %2',
+            EV_DEF: '定义函数 %1 参数 %2 执行 %3',
+            FUNC_CALL_STMT: '调用函数 %1 参数 %2',
+            FUNC_CALL_VAL: '获取函数 %1 参数 %2',
+
+            CTRL_FOR: '变量 %1 重复 %2 次',
+            CTRL_WHILE: '当 %1 成立时重复',
+            CTRL_IF: '如果 %1 那么',
+            CTRL_IF_ELSE: '如果 %1 那么 %2 否则 %3',
+            CTRL_BREAK: '跳出循环',
+            CTRL_CONTINUE: '继续下一次循环',
+            CTRL_PASS: '跳过',
+            CTRL_RETURN: '返回 %1',
+            CTRL_TRY: '尝试执行 %1 发生异常 %2 时执行 %3',
+            CTRL_WITH: '使用 %1 作为变量 %2 执行',
+
+            VAR_GET: '%1',
+            VAR_SET: '变量 %1 设为 %2',
+            OBJ_SET_ITEM: '变量 %1 的项目 %2 设为 %3',
+            OBJ_GET_ITEM: '变量 %1 的项目 %2',
+            VAR_GLOBAL: '声明全局变量 %1',
+            VAR_DEL: '删除变量 %1',
+
+            OP_NUM: '%1',
+            OP_STR: '"%1"',
+            OP_TUPLE: '(%1)',
+            OP_LIST: '[%1]',
+            OP_DICT: '{%1}',
+            OP_BOOL: '%1',
+            OP_NONE: '空值',
+            OP_ARITHMETIC: '%1 %2 %3',
+            OP_COMPARE: '%1 %2 %3',
+            OP_LOGICAL: '%1 %2 %3',
+            OP_NOT: '不成立 %1',
+            OP_JOIN: '%1 与 %2',
+            OP_STARARG: '展开参数 *%1',
+            OP_KWSTARARG: '展开字典 **%1',
+            OP_DICT_KV: '键 %1 值 %2'
+        }
+    },
     'en': {
         UI: {
             file: 'File',

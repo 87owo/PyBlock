@@ -1,8 +1,15 @@
-import os, subprocess
+import os
+import subprocess
+import threading
+import webbrowser
+
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), 'project'))
+HOST = '127.0.0.1'
+PORT = 5000
+APP_URL = f'http://{HOST}:{PORT}'
 
 os.makedirs(PROJECT_DIR, exist_ok=True)
 running_processes = {}
@@ -82,10 +89,16 @@ def stop_project():
         return jsonify({'success': True})
     return jsonify({'success': False})
 
+def open_browser():
+    webbrowser.open(APP_URL)
+
 if __name__ == '__main__':
     default_project = os.path.join(PROJECT_DIR, 'project_1.py')
     if not os.path.exists(default_project):
-        with open(default_project, 'w', encoding='utf-8') as f:
-            f.write('print("Hello Block OS")\n')
+        with open(default_project, 'w', encoding='utf-8'):
+            pass
     
-    app.run(host='127.0.0.1', port=5000, debug=True, use_reloader=False)
+    browser_timer = threading.Timer(1.0, open_browser)
+    browser_timer.daemon = True
+    browser_timer.start()
+    app.run(host=HOST, port=PORT, debug=True, use_reloader=False)

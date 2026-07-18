@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f5f5f7">
     <title>Block OS</title>
+    <link rel="icon" href="/static/img/icon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/static/css/style.css">
     <script src="/static/js/blockly.min.js"></script>
     <script src="/static/js/python_compressed.js"></script>
@@ -12,47 +14,120 @@
 </head>
 <body>
     <header class="navbar">
+        <div class="brand">
+            <span class="brand-mark" aria-hidden="true">
+                <img class="brand-icon" src="/static/img/icon.ico" alt="" onerror="this.remove()">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="3" width="8" height="8" rx="2"></rect>
+                    <rect x="13" y="3" width="8" height="8" rx="2"></rect>
+                    <rect x="3" y="13" width="8" height="8" rx="2"></rect>
+                    <path d="M17 14v6M14 17h6"></path>
+                </svg>
+            </span>
+            <span class="brand-copy">
+                <strong>Block OS</strong>
+                <small>Visual Python Studio</small>
+            </span>
+        </div>
+
         <div class="nav-group">
             <div class="dropdown">
-                <button class="dropbtn" data-i18n="file"></button>
+                <button class="dropbtn" type="button">
+                    <span data-i18n="file">File</span>
+                    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m5 6 3 3 3-3"></path></svg>
+                </button>
                 <div class="dropdown-content">
-                    <a href="#" id="btnNew" data-i18n="new_project"></a>
-                    <a href="#" id="btnSave" data-i18n="save_project"></a>
-                    <a href="#" id="btnRun" data-i18n="run_project"></a>
-                    <a href="#" id="btnStop" data-i18n="stop_project"></a>
+                    <a href="#" id="btnNew">
+                        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12"></path></svg>
+                        <span data-i18n="new_project">New Project</span>
+                    </a>
+                    <a href="#" id="btnSave">
+                        <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M4 3h10l3 3v11H4V3Z"></path><path d="M7 3v5h7V3M7 17v-5h7v5"></path></svg>
+                        <span data-i18n="save_project">Save Project</span>
+                    </a>
                 </div>
             </div>
             <div class="dropdown">
-                <button class="dropbtn" data-i18n="settings"></button>
+                <button class="dropbtn" type="button">
+                    <span data-i18n="settings">Settings</span>
+                    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m5 6 3 3 3-3"></path></svg>
+                </button>
                 <div class="dropdown-content">
-                    <a href="#" onclick="app.changeLanguage('zh-TW')">繁體中文</a>
                     <a href="#" onclick="app.changeLanguage('en')">English</a>
+                    <a href="#" onclick="app.changeLanguage('zh-TW')">繁體中文</a>
+                    <a href="#" onclick="app.changeLanguage('zh-CN')">简体中文</a>
                 </div>
             </div>
-            <div class="project-indicator">
+        </div>
+
+        <div class="header-actions">
+            <div class="project-indicator" title="Current project">
+                <span class="status-dot" aria-hidden="true"></span>
                 <span id="currentProjectName">project_1</span>
             </div>
+            <button class="action-btn danger" id="btnStop" type="button">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="5" y="5" width="10" height="10" rx="2"></rect></svg>
+                <span data-i18n="stop_project">Stop Project</span>
+            </button>
+            <button class="action-btn primary" id="btnRun" type="button">
+                <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7 5 8 5-8 5V5Z"></path></svg>
+                <span data-i18n="run_project">Run Project</span>
+            </button>
         </div>
     </header>
 
-    <div class="main-container">
-        <aside class="file-manager">
-            <h3 data-i18n="file_manager"></h3>
+    <main class="main-container">
+        <aside class="file-manager" aria-label="專案管理">
+            <div class="panel-header">
+                <div class="panel-title">
+                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M3 5.5h5l1.5 2H17v8.5H3V5.5Z"></path></svg>
+                    <h2 data-i18n="file_manager">Project Manager</h2>
+                </div>
+                <button class="icon-btn" type="button" aria-label="New project" onclick="document.getElementById('btnNew').click()">
+                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12"></path></svg>
+                </button>
+            </div>
+            <div class="section-label">Workspace</div>
             <ul id="fileList"></ul>
+            <div class="sidebar-footer">
+                <span class="status-dot" aria-hidden="true"></span>
+                <span>Local workspace</span>
+            </div>
         </aside>
-        
-        <div class="workspace-wrapper">
-            <div id="blocklyDiv"></div>
-        </div>
 
-        <aside class="code-panel">
-            <div class="code-header" data-i18n="python_preview"></div>
+        <section class="workspace-wrapper" aria-label="Block workspace">
+            <div class="panel-header canvas-header">
+                <div class="panel-title">
+                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><rect x="3" y="3" width="6" height="6" rx="1.5"></rect><rect x="11" y="11" width="6" height="6" rx="1.5"></rect><path d="M9 6h3a2 2 0 0 1 2 2v3"></path></svg>
+                    <h2>Block Workspace</h2>
+                </div>
+                <span class="panel-meta">Drag · Connect · Build</span>
+            </div>
+            <div class="blockly-stage">
+                <div id="blocklyDiv"></div>
+            </div>
+        </section>
+
+        <aside class="code-panel" aria-label="Python preview">
+            <div class="panel-header code-header">
+                <div class="panel-title">
+                    <svg viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m7.5 5-5 5 5 5M12.5 5l5 5-5 5"></path></svg>
+                    <h2 data-i18n="python_preview">Python Preview</h2>
+                </div>
+                <span class="language-badge">PY</span>
+            </div>
             <pre id="pythonCode"></pre>
         </aside>
-    </div>
+    </main>
 
     <footer class="terminal-container">
-        <div class="terminal-header" data-i18n="terminal_log"></div>
+        <div class="terminal-header">
+            <div class="panel-title">
+                <span class="terminal-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <h2 data-i18n="terminal_log">Terminal Log</h2>
+            </div>
+            <span class="terminal-status"><span class="status-dot" aria-hidden="true"></span>Ready</span>
+        </div>
         <pre class="terminal-output" id="terminalOutput"></pre>
     </footer>
 </body>
